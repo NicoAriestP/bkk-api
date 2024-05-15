@@ -36,6 +36,10 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('email')->unique();
             $table->string('password');
+            $table->enum('gender', ['laki-laki', 'perempuan']);
+            $table->date('born_date');
+            $table->text('address');
+            $table->tinyInteger('is_graduated')->default(0);
             $table->timestamps();
         });
     }
