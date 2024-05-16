@@ -30,6 +30,7 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->string('email')->unique();
             $table->string('password');
+            $table->text('address');
             $table->timestamps();
         });
     }
