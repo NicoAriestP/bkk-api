@@ -31,7 +31,7 @@ return new class extends Migration
             $table->date('due_at');
             $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->string('location', 100);
-            $table->string('file', 4096);
+            $table->string('file', 2048)->nullable();
 
             $table->timestamps();
         });

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('questionnaire_questions', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('created_by')
@@ -26,9 +26,16 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
-            $table->string('title');
-            $table->text('content');
-            $table->string('file', 2048)->nullable();
+            $table->foreignId('questionnaire_id')
+                ->nullable()
+                ->constrained('questionnaires')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->string('question');
+            $table->string('type', 20);
+            $table->text('notes');
+            $table->tinyInteger('is_multiple_answers')->default(0); 
             $table->timestamps();
         });
     }
@@ -38,6 +45,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('questionnaire_questions');
     }
 };

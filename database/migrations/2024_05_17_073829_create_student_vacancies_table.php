@@ -11,24 +11,29 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('student_vacancies', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('created_by')
                 ->nullable()
-                ->constrained('users')
+                ->constrained('students')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
             $table->foreignId('updated_by')
                 ->nullable()
-                ->constrained('users')
+                ->constrained('students')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
 
-            $table->string('title');
-            $table->text('content');
-            $table->string('file', 2048)->nullable();
+            $table->foreignId('approved_by')
+                ->nullable()
+                ->constrained('partners')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
+
+            $table->string('applyment_file', 2048)->nullable();
+            $table->tinyInteger('is_approved')->default(0);
             $table->timestamps();
         });
     }
@@ -38,6 +43,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('student_vacancies');
     }
 };

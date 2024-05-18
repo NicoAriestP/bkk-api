@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('announcements', function (Blueprint $table) {
+        Schema::create('questionnaires', function (Blueprint $table) {
             $table->id();
 
             $table->foreignId('created_by')
@@ -27,8 +27,9 @@ return new class extends Migration
                 ->onDelete('restrict');
 
             $table->string('title');
-            $table->text('content');
-            $table->string('file', 2048)->nullable();
+            $table->text('description');
+            $table->string('type');
+            $table->date('due_at');
             $table->timestamps();
         });
     }
@@ -38,6 +39,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('announcements');
+        Schema::dropIfExists('questionnaires');
     }
 };

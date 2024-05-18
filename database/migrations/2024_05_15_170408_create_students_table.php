@@ -33,13 +33,19 @@ return new class extends Migration
                 ->onDelete('restrict');
 
             $table->string('name', 50);
+            $table->string('nisn', 50);
             $table->string('phone', 20);
             $table->string('email')->unique();
             $table->string('password');
             $table->enum('gender', ['laki-laki', 'perempuan']);
             $table->date('born_date');
+            $table->string('height', 5);
+            $table->string('weight', 5);
+            $table->string('province', 50);
+            $table->string('city', 50);
             $table->text('address');
             $table->tinyInteger('is_graduated')->default(0);
+            $table->tinyInteger('is_married')->default(0);
             $table->timestamps();
         });
     }
